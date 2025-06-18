@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
         {/* Subtext */}
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-2 leading-relaxed">
           Grow Your Brand & Social Media with Production-Ready Video Ads.
-          Powered by Agentic AI.
+          <span className="hidden md:inline"> Powered by Agentic AI.</span>
         </p>
       </div>
 

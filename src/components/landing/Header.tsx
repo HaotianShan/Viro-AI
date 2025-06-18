@@ -64,7 +64,7 @@ const Header = () => {
           className="flex items-center space-x-1 px-3 py-2 rounded-full border bg-[#201c1c] border-[#201c1c] text-gray-400 hover:bg-[#282424] hover:text-gray-40"
         >
           <a
-            href="mailto:service.viro@outlook.com"
+            href="mailto:service.viroai@gmail.com"
             onClick={() => setDisableAutoScroll(true)}
           >
             <Mail className="w-4 h-4" />

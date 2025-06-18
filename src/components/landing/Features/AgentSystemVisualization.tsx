@@ -267,6 +267,59 @@ const AgentSystemVisualization = () => {
               <div className="flex items-center justify-center"></div>
               <div className="relative w-full max-w-2xl mx-auto">
                 <div className="relative grid grid-cols-3 grid-rows-3 gap-6 aspect-square">
+                  {/* Video Generating Placeholder */}
+                  {!showVideoVisualizations && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Abstract blurry shapes */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="relative">
+                            {/* Animated gradient circle */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-48 h-48 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 blur-2xl animate-pulse"></div>
+                            </div>
+
+                            {/* Floating circles */}
+                            <div className="absolute -top-8 -left-8 w-24 h-24 rounded-full bg-cyan-500/10 blur-xl animate-float"></div>
+                            <div className="absolute -bottom-8 -right-8 w-20 h-20 rounded-full bg-blue-500/10 blur-xl animate-float animation-delay-1000"></div>
+                            <div className="absolute top-12 -right-12 w-16 h-16 rounded-full bg-purple-500/10 blur-xl animate-float animation-delay-2000"></div>
+
+                            {/* Central shimmer effect */}
+                            <div className="relative z-10 w-52 h-52 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-gray-700 flex items-center justify-center shadow-lg">
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-800/50 to-transparent animate-shimmer"></div>
+                              <div className="flex flex-col items-center justify-center relative z-10">
+                                <svg
+                                  className="animate-spin h-8 w-8 text-gray-500"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                  ></circle>
+                                  <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                  ></path>
+                                </svg>
+                                <span className="mt-4 text-gray-400 text-sm">
+                                  Generating video...
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Final Video Output */}
                   <div className="col-start-2 row-start-2 flex items-center justify-center">
                     <div
                       className={`transition-all duration-700 transform ${
@@ -286,6 +339,7 @@ const AgentSystemVisualization = () => {
                     </div>
                   </div>
 
+                  {/* Video Clips */}
                   {[0, 1, 2, 3].map((i) => {
                     const positions = [
                       { row: 1, col: 2 }, // Top

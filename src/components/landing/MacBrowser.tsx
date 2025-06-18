@@ -233,7 +233,7 @@ const MacBrowser = () => {
     },
     plugins: {
       legend: {
-        display: false,
+        display: false, // Static legend removed
       },
       title: {
         display: true,
@@ -311,123 +311,121 @@ const MacBrowser = () => {
     },
   };
 
-  // Custom legend component
-  const CustomLegend = () => (
-    <div className="absolute right-4 top-4 z-10 bg-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-gray-700/50 shadow-lg">
-      <div className="space-y-2">
-        {chartData.datasets.map((dataset) => (
-          <div key={dataset.label} className="flex items-center">
-            <div
-              className="w-3 h-3 rounded-full mr-2"
-              style={{ backgroundColor: dataset.borderColor }}
-            />
-            <span className="text-xs text-gray-300">{dataset.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
   return (
-    <div className="w-full max-w-[60rem] mx-auto px-4">
-      <div className="mac-mockup rounded-xl overflow-hidden shadow-2xl shadow-blue-500/10 border border-gray-800/50 bg-gradient-to-br from-gray-900/80 to-gray-950 backdrop-blur-sm">
-        {/* Browser Chrome */}
-        <div className="browser-chrome bg-gray-900/80 border-b border-gray-800/50 backdrop-blur-sm">
-          <div className="flex items-center px-4 py-3">
-            <div className="flex space-x-2 mr-4">
-              <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-            </div>
-            <div className="flex-1 bg-gray-800/60 rounded-md px-3 py-1.5 text-xs text-gray-400 font-mono">
-              dashboard.theviroai.com
-            </div>
-            <div className="ml-4 flex space-x-2">
-              {(["1D", "1W", "1M"] as const).map((period) => (
-                <button
-                  key={period}
-                  onClick={() => setActivePeriod(period)}
-                  className={`px-2 py-1 text-xs rounded transition-all ${
-                    activePeriod === period
-                      ? "text-white bg-blue-500/20 border border-blue-500/30"
-                      : "text-gray-400 bg-gray-800/50 hover:bg-gray-700/50"
-                  }`}
-                >
-                  {period}
-                </button>
-              ))}
+    <div className="w-full flex justify-center px-0 sm:px-4">
+      <div className="w-[95vw] max-w-[70rem]">
+        <div className="mac-mockup rounded-xl overflow-hidden shadow-2xl shadow-blue-500/10 border border-gray-800/50 bg-gradient-to-br from-gray-900/80 to-gray-950 backdrop-blur-sm">
+          {/* Browser Chrome */}
+          <div className="browser-chrome bg-gray-900/80 border-b border-gray-800/50 backdrop-blur-sm">
+            <div className="flex flex-col sm:flex-row items-center px-4 py-3">
+              <div className="flex items-center w-full sm:w-auto">
+                <div className="flex space-x-2 mr-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                </div>
+                <div className="flex-1 bg-gray-800/60 rounded-md px-3 py-1.5 text-xs text-gray-400 font-mono truncate">
+                  dashboard.theviroai.com
+                </div>
+              </div>
+
+              {/* Time period selector - now always visible */}
+              <div className="w-full sm:w-auto flex justify-center sm:justify-end mt-3 sm:mt-0">
+                <div className="flex space-x-2">
+                  {(["1D", "1W", "1M"] as const).map((period) => (
+                    <button
+                      key={period}
+                      onClick={() => setActivePeriod(period)}
+                      className={`px-3 py-1.5 text-xs rounded transition-all min-w-[50px] ${
+                        activePeriod === period
+                          ? "text-white bg-blue-500/20 border border-blue-500/30"
+                          : "text-gray-400 bg-gray-800/50 hover:bg-gray-700/50"
+                      }`}
+                    >
+                      {period}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Browser Content */}
-        <div className="browser-content bg-gradient-to-b from-gray-900 to-gray-950 p-6">
-          {/* Chart */}
-          <div className="h-80 w-full relative">
-            <Line data={chartData} options={chartOptions} />
-            <CustomLegend />
-          </div>
-
-          {/* Metrics Grid - 2 rows, 2 columns */}
-          <div
-            ref={metricsRef}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8"
-          >
-            {/* Row 1 */}
-            <div className="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
-              <div className="text-gray-400 text-sm mb-1">
-                Total Impressions
-              </div>
-              <div className="text-2xl font-bold text-white">
-                {metricsInView ? (
-                  <AnimatedCounter value={totalImpressions} />
-                ) : (
-                  "0"
-                )}
-              </div>
-              <div className="text-blue-400 text-xs mt-1">
-                Potential reach of your content
-              </div>
+          {/* Browser Content */}
+          <div className="browser-content bg-gradient-to-b from-gray-900 to-gray-950 p-4 sm:p-6">
+            {/* Chart - shorter on mobile */}
+            <div className="h-64 sm:h-80 w-full relative">
+              <Line data={chartData} options={chartOptions} />
             </div>
 
-            <div className="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
-              <div className="text-gray-400 text-sm mb-1">Total Clicks</div>
-              <div className="text-2xl font-bold text-white">
-                {metricsInView ? <AnimatedCounter value={totalClicks} /> : "0"}
+            {/* Metrics Grid - optimized for mobile */}
+            <div
+              ref={metricsRef}
+              className="grid grid-cols-2 gap-3 sm:gap-4 mt-6 sm:mt-8"
+            >
+              {/* Row 1 */}
+              <div className="bg-gray-800/30 p-3 sm:p-4 rounded-xl border border-gray-700/50">
+                <div className="text-gray-400 text-xs sm:text-sm mb-1">
+                  Total Impressions
+                </div>
+                <div className="text-xl sm:text-2xl font-bold text-white">
+                  {metricsInView ? (
+                    <AnimatedCounter value={totalImpressions} />
+                  ) : (
+                    "0"
+                  )}
+                </div>
+                <div className="text-blue-400 text-xs mt-1">
+                  Potential reach
+                </div>
               </div>
-              <div className="text-purple-400 text-xs mt-1">
-                Visitors driven to your site
-              </div>
-            </div>
 
-            {/* Row 2 */}
-            <div className="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
-              <div className="text-gray-400 text-sm mb-1">Engagement Rate</div>
-              <div className="text-2xl font-bold text-white">
-                {metricsInView ? (
-                  <AnimatedCounter value={engagementRate} isPercentage />
-                ) : (
-                  "0%"
-                )}
+              <div className="bg-gray-800/30 p-3 sm:p-4 rounded-xl border border-gray-700/50">
+                <div className="text-gray-400 text-xs sm:text-sm mb-1">
+                  Total Clicks
+                </div>
+                <div className="text-xl sm:text-2xl font-bold text-white">
+                  {metricsInView ? (
+                    <AnimatedCounter value={totalClicks} />
+                  ) : (
+                    "0"
+                  )}
+                </div>
+                <div className="text-purple-400 text-xs mt-1">
+                  Visitors to site
+                </div>
               </div>
-              <div className="text-green-400 text-xs mt-1">
-                Audience interaction with content
-              </div>
-            </div>
 
-            <div className="bg-gradient-to-br from-blue-900/30 to-blue-900/10 p-4 rounded-xl border border-blue-800/30">
-              <div className="text-blue-300 text-sm mb-1">
-                Click-Through Rate
+              {/* Row 2 */}
+              <div className="bg-gray-800/30 p-3 sm:p-4 rounded-xl border border-gray-700/50">
+                <div className="text-gray-400 text-xs sm:text-sm mb-1">
+                  Engagement Rate
+                </div>
+                <div className="text-xl sm:text-2xl font-bold text-white">
+                  {metricsInView ? (
+                    <AnimatedCounter value={engagementRate} isPercentage />
+                  ) : (
+                    "0%"
+                  )}
+                </div>
+                <div className="text-green-400 text-xs mt-1">
+                  Audience interaction
+                </div>
               </div>
-              <div className="text-2xl font-bold text-white">
-                {metricsInView ? (
-                  <AnimatedCounter value={ctr} isPercentage />
-                ) : (
-                  "0%"
-                )}
-              </div>
-              <div className="text-blue-400 text-xs mt-1">
-                Conversion from views to clicks
+
+              <div className="bg-gradient-to-br from-blue-900/30 to-blue-900/10 p-3 sm:p-4 rounded-xl border border-blue-800/30">
+                <div className="text-blue-300 text-xs sm:text-sm mb-1">
+                  Click-Through Rate
+                </div>
+                <div className="text-xl sm:text-2xl font-bold text-white">
+                  {metricsInView ? (
+                    <AnimatedCounter value={ctr} isPercentage />
+                  ) : (
+                    "0%"
+                  )}
+                </div>
+                <div className="text-blue-400 text-xs mt-1">
+                  Views to clicks
+                </div>
               </div>
             </div>
           </div>
