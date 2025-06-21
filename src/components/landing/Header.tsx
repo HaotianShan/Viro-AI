@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react"; // Changed from Sparkles to Mail
 import { useState } from "react";
 import { useScrollContext } from "@/lib/scroll-context";
+import logo from "/logo.svg";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -23,7 +24,11 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <span className="ml-2 font-bold text-xl">Viro AI </span>
+          <img
+            src={logo}
+            alt="Viro AI Logo"
+            className="h-8 w-auto" 
+          />
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">

@@ -8,11 +8,13 @@ import StickyBar from "@/components/landing/StickyBar";
 import Pricing from "@/components/landing/Pricing";
 import VideoSection from "@/components/landing/VideoDemo";
 import AgentSystemVisualization from "@/components/landing/Features/AgentSystemVisualization";
+import Test from "@/components/landing/Test";
 
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground">
     <Header />
     <Hero />
+    {/* <Test /> */}
     <VideoSection />
     <AgentSystemVisualization />
     <Pricing />
